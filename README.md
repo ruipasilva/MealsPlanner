@@ -21,7 +21,7 @@ Learn UIKit and explore as much swift as I can using different ways of presentin
 
 ## Contact
 
+ruipasilva@gmail.com
+
 Please Visit http://www.ruisilva.xyz to reach out.
-# MealsPlanner
-# MealsPlanner
-# MealsPlanner
+
