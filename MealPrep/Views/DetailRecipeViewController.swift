@@ -15,8 +15,8 @@ class DetailRecipeViewController: UIViewController {
     
     var titleLabel = TitleLabel(frame: .zero)
     var image = DetailImageView(frame: .zero)
-    let backButton = CustomBarButton(buttonImage: UIImage(systemName: "chevron.backward")!, color: .systemIndigo)
-    let editButton = CustomBarButton(buttonImage: UIImage(systemName: "pencil")!, color: .systemIndigo)
+    let backButton = CustomBarButton(buttonImage: UIImage(systemName: "chevron.backward")!, color: .systemGreen)
+    let editButton = CustomBarButton(buttonImage: UIImage(systemName: "pencil")!, color: .systemGreen)
     let ingredientsLabel = MediumTitleLabel(frame: .zero)
     let instructionsLabel = SmallTitleLabel(frame: .zero)
     let ingredientsList = BodyLabel(frame: .zero)
@@ -32,6 +32,7 @@ class DetailRecipeViewController: UIViewController {
         configureViewController()
         addViews()
         configureButtons()
+        configureTextViews()
         configureLabels()
         configureLayout()
     }
@@ -68,6 +69,11 @@ class DetailRecipeViewController: UIViewController {
         titleLabel.text = recipe?.label
         ingredientsLabel.text = "INGREDIENTS"
         ingredientsList.text = recipe?.ingredients
+        
+    }
+    
+    func configureTextViews() {
+        ingredientsList.text = "You haven't added any ingredients yet"
     }
     
     func configureLayout() {

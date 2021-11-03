@@ -36,6 +36,7 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
         configureLabels()
         configureConstrains()
         configureNetworkCall()
+        configureImageGradient()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,17 +62,25 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
+        
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.isHidden = true
  
         ingredientsScrollView.translatesAutoresizingMaskIntoConstraints = false
         ingredientsView.translatesAutoresizingMaskIntoConstraints = false
         ingredientsList.translatesAutoresizingMaskIntoConstraints = false
         
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.isHidden = true
+        
+        
+    }
+    
+    func configureImageGradient() {
+        let darkColor = UIColor.darkGray.cgColor
+        let lightColor = UIColor.clear.cgColor
         
         gradient = CAGradientLayer()
         gradient.frame = image.bounds
-        gradient.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
+        gradient.colors = [darkColor, lightColor]
         image.layer.addSublayer(gradient)
     }
     
@@ -96,7 +105,7 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
         }
         let safariVC = SFSafariViewController(url: url)
         safariVC.transitioningDelegate = self
-        safariVC.preferredControlTintColor = .systemIndigo
+        safariVC.preferredControlTintColor = .systemGreen
         present(safariVC, animated: true)
     }
     

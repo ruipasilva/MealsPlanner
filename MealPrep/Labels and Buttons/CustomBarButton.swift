@@ -24,7 +24,7 @@ class CustomBarButton: UIButton {
     }
     init(buttonImage: UIImage, color: UIColor) {
         super.init(frame: .zero)
-        self.buttonImage = buttonImage
+        self.buttonImage = buttonImage.withConfiguration(UIImage.SymbolConfiguration(textStyle: .title3))
         self.color = color
         
         configure()

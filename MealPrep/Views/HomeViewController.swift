@@ -15,6 +15,20 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    
+    private let noRecipesLabel: UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        label.text = "Add your own Recipes here"
+        label.textAlignment = .center
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 21, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
     let defaults = UserDefaults.standard
     
     var recipes: [MyRecipe] = [] {
@@ -24,12 +38,6 @@ class HomeViewController: UIViewController {
     }
     
     var recipe: MyRecipe?
-    
-    @IBSegueAction func addMealViewController(_ coder: NSCoder) -> AddMealViewController? {
-        let vc = AddMealViewController(coder: coder)
-        vc?.delegate = self
-        return vc
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +56,9 @@ class HomeViewController: UIViewController {
         tableView.backgroundColor = .systemBackground
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+        navigationController?.navigationBar.tintColor = .systemGreen
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus.circle.fill"), style: .plain, target: self, action: #selector(didTapAddButton))
+
     }
     
     func saveRecipes() {
@@ -63,12 +74,37 @@ class HomeViewController: UIViewController {
         else { return }
         self.recipes = savedRecipes
     }
+    
+    func configureUI() {
+        
+        if recipes.count == 0 {
+            tableView.isHidden = true
+            noRecipesLabel.isHidden = false
+            tableView.reloadData()
+        } else {
+            tableView.isHidden = false
+            noRecipesLabel.isHidden = true
+            tableView.reloadData()
+        }
+        
+        NSLayoutConstraint.activate([
+            noRecipesLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noRecipesLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
+    @objc func didTapAddButton() {
+        let vc = AddRecipeViewController()
+        let navVC =  UINavigationController(rootViewController: vc)
+        vc.delegate = self
+        present(navVC, animated: true)
+    }
 }
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate, UIAdaptivePresentationControllerDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        recipes.count
+        return recipes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -107,12 +143,10 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate, UIAdap
     }
 }
 extension HomeViewController: AddViewControllerDelegate {
-    
-    func addViewController(_ vc: AddMealViewController, addNew recipe: MyRecipe) {
+    func addViewController(_ vc: AddRecipeViewController, addNew recipe: MyRecipe) {
         recipes.append(recipe)
         saveRecipes()
         tableView.insertRows(at: [IndexPath(row: recipes.count - 1, section: 0)], with: .automatic)
-        
     }
 }
 

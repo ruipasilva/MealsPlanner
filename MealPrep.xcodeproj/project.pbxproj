@@ -28,6 +28,7 @@
 		69955CE6270CC7EC00D3B3BB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69955CE5270CC7EC00D3B3BB /* RealmSwift */; };
 		69A61888271E1E7B00E6BEFF /* MediumTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A61887271E1E7B00E6BEFF /* MediumTitleLabel.swift */; };
 		69ABC6F9270B40A9006AE411 /* VisitWebsiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ABC6F8270B40A9006AE411 /* VisitWebsiteButton.swift */; };
+		69BA4B632721F05C00EDF090 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BA4B622721F05C00EDF090 /* AddRecipeViewController.swift */; };
 		69BCE561270F62AB00EE6AB4 /* IQTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BCE546270F62AA00EE6AB4 /* IQTextView.swift */; };
 		69BCE562270F62AB00EE6AB4 /* IQKeyboardManager+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BCE547270F62AA00EE6AB4 /* IQKeyboardManager+Internal.swift */; };
 		69BCE563270F62AB00EE6AB4 /* IQPreviousNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BCE549270F62AA00EE6AB4 /* IQPreviousNextView.swift */; };
@@ -61,7 +62,6 @@
 		69F51A5C26E3915600723FD6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F51A5B26E3915600723FD6 /* HomeViewController.swift */; };
 		69F51A5E26E3916400723FD6 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F51A5D26E3916400723FD6 /* ExploreViewController.swift */; };
 		69F51A6026E3919000723FD6 /* BookmarkedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F51A5F26E3919000723FD6 /* BookmarkedViewController.swift */; };
-		69F51A6226E399C300723FD6 /* AddMealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F51A6126E399C300723FD6 /* AddMealViewController.swift */; };
 		69FA454726FB66EA00D56972 /* ExploreCellImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA454626FB66EA00D56972 /* ExploreCellImageView.swift */; };
 		69FA454926FB74B800D56972 /* DetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA454826FB74B800D56972 /* DetailImageView.swift */; };
 /* End PBXBuildFile section */
@@ -86,6 +86,7 @@
 		697CBE6A2704D41300D19C42 /* BodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyLabel.swift; sourceTree = "<group>"; };
 		69A61887271E1E7B00E6BEFF /* MediumTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumTitleLabel.swift; sourceTree = "<group>"; };
 		69ABC6F8270B40A9006AE411 /* VisitWebsiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitWebsiteButton.swift; sourceTree = "<group>"; };
+		69BA4B622721F05C00EDF090 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		69BCE546270F62AA00EE6AB4 /* IQTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQTextView.swift; sourceTree = "<group>"; };
 		69BCE547270F62AA00EE6AB4 /* IQKeyboardManager+Internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQKeyboardManager+Internal.swift"; sourceTree = "<group>"; };
 		69BCE549270F62AA00EE6AB4 /* IQPreviousNextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQPreviousNextView.swift; sourceTree = "<group>"; };
@@ -122,7 +123,6 @@
 		69F51A5B26E3915600723FD6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		69F51A5D26E3916400723FD6 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		69F51A5F26E3919000723FD6 /* BookmarkedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedViewController.swift; sourceTree = "<group>"; };
-		69F51A6126E399C300723FD6 /* AddMealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealViewController.swift; sourceTree = "<group>"; };
 		69FA454626FB66EA00D56972 /* ExploreCellImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCellImageView.swift; sourceTree = "<group>"; };
 		69FA454826FB74B800D56972 /* DetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,7 +170,7 @@
 				69F51A5B26E3915600723FD6 /* HomeViewController.swift */,
 				69E622C4271371E500EC2CF4 /* DetailRecipeViewController.swift */,
 				695CE2752715E0A6001DEFC1 /* EditRecipeViewController.swift */,
-				69F51A6126E399C300723FD6 /* AddMealViewController.swift */,
+				69BA4B622721F05C00EDF090 /* AddRecipeViewController.swift */,
 				69F51A5D26E3916400723FD6 /* ExploreViewController.swift */,
 				6932A17B26F23EA1001D1CD6 /* DetailExploreViewController.swift */,
 				69F51A5F26E3919000723FD6 /* BookmarkedViewController.swift */,
@@ -387,6 +387,7 @@
 			files = (
 				6932A17726E97FDA001D1CD6 /* ExploreViewCell.swift in Sources */,
 				69F51A5A26E390C100723FD6 /* Recipe.swift in Sources */,
+				69BA4B632721F05C00EDF090 /* AddRecipeViewController.swift in Sources */,
 				695CE2762715E0A6001DEFC1 /* EditRecipeViewController.swift in Sources */,
 				6963490E26E6706A00CD715F /* HomeViewCell.swift in Sources */,
 				6963495826E93B9200CD715F /* FavoritesViewCell.swift in Sources */,
@@ -405,7 +406,6 @@
 				69BCE575270F62AB00EE6AB4 /* IQUIView+Hierarchy.swift in Sources */,
 				69F51A4826E2399700723FD6 /* SceneDelegate.swift in Sources */,
 				69BCE574270F62AB00EE6AB4 /* IQUITextFieldView+Additions.swift in Sources */,
-				69F51A6226E399C300723FD6 /* AddMealViewController.swift in Sources */,
 				6932A17F26F24A1B001D1CD6 /* ErrorMessages.swift in Sources */,
 				69BCE576270F62AB00EE6AB4 /* IQNSArray+Sort.swift in Sources */,
 				69BCE561270F62AB00EE6AB4 /* IQTextView.swift in Sources */,

@@ -13,4 +13,6 @@ class ExploreViewCell: UICollectionViewCell {
     @IBOutlet weak var imageLabel: ExploreCellImageView!
     @IBOutlet weak var cousineTypeLabel: UILabel!
     
+    
+   
 }

@@ -38,7 +38,7 @@ class EditRecipeViewController: UIViewController, UITextFieldDelegate {
         title = "Edit Recipe"
         view.backgroundColor = .secondarySystemBackground
         titleTextfield.delegate = self
-        navigationController?.navigationBar.tintColor = .systemIndigo
+        navigationController?.navigationBar.tintColor = .systemGreen
         navigationController?.isNavigationBarHidden = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
     }
