@@ -15,18 +15,20 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     var ingredientsView = UIView()
     var gradient: CAGradientLayer!
     
-    var titleLabel = TitleLabel(frame: .zero)
-    var image = DetailImageView(frame: .zero)
-    var addToBookmark = AddToBookmarkButton(background: .systemBlue, title: "Bookmark")
-    let backButton = CustomBarButton(buttonImage: UIImage(systemName: "chevron.backward")!, color: .white)
-    let bookmarkButton = CustomBarButton(buttonImage: (UIImage(systemName: "bookmark"))!, color: .white)
-    let ingredientsLabel = MediumTitleLabel(frame: .zero)
-    let ingredientsList = BodyLabel(frame: .zero)
-    let visitWebsite = VisitWebsiteButton(frame: .zero)
+    private var titleLabel = TitleLabel(frame: .zero)
+    private var image = DetailImageView(frame: .zero)
+    private var addToBookmark = AddToBookmarkButton(background: .systemBlue, title: "Bookmark")
+    private let backButton = BackButton(buttonImage: UIImage(systemName: "chevron.backward")!, color: .white)
+    var bookmarkButton = BookmarkButton(buttonImage: UIImage(systemName: "bookmark")!, color: .white)
+    private let ingredientsLabel = MediumTitleLabel(frame: .zero)
+    private let ingredientsList = BodyLabel(frame: .zero)
+    private let visitWebsite = VisitWebsiteButton(frame: .zero)
+    
+    private var isBookmarked: Bool = false
     
     var uri: String!
     
-    var results: RecipeInfoResult?
+    private var results: RecipeInfoResult?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +77,7 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     }
     
     func configureImageGradient() {
-        let darkColor = UIColor.darkGray.cgColor
+        let darkColor = UIColor.black.withAlphaComponent(0.7).cgColor
         let lightColor = UIColor.clear.cgColor
         
         gradient = CAGradientLayer()
@@ -98,7 +100,7 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     @objc func visitWebsiteButtonTapped() {
       
         guard let url = URL(string: visitWebsite.url!) else {
-            let alertVC = UIAlertController(title: "Ooops", message: "Something went wrong  with the  url", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Ooops", message: "Something went wrong with the url", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alertVC, animated: true)
             return
@@ -121,7 +123,7 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
                     self.titleLabel.text = results.recipe.label
                     self.image.downloadImages(from: results.recipe.image!)
                     self.visitWebsite.url = results.recipe.url
-                    self.ingredientsList.text = "•\(list!.joined(separator: "\n").replacingOccurrences(of: "\n", with: "\n•"))"
+                    self.ingredientsList.text = " • \(list!.joined(separator: "\n").replacingOccurrences(of: "\n", with: "\n • "))"
                 }
             case .failure(let error):
                 print(error)
@@ -134,6 +136,7 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     }
     
     @objc func bookmark() {
+        isBookmarked.toggle()
         showLoadingView()
         NetworkManager.shared.getRecipeInfo(for: uri.replacingOccurrences(of: "http://www.edamam.com/ontologies/edamam.owl#", with: "")) { [weak self] recipes in
             guard let self = self else { return }
@@ -147,13 +150,14 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
                     guard let self = self else { return }
                     guard let _ = error  else {
                         DispatchQueue.main.async {
-                            let alertVC = UIAlertController(title: "Success", message: "You've successfully saved this recipe", preferredStyle: .alert)
-                            alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                            self.present(alertVC, animated: true)
+                            if self.isBookmarked {
+                                self.bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+                            }
                         }
                         return
                     }
                     DispatchQueue.main.async {
+                        
                         let alertVC = UIAlertController(title: "Oops", message: "You've already bookmarked this Recipe", preferredStyle: .alert)
                         alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                         self.present(alertVC, animated: true)
@@ -164,6 +168,7 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
             }
         }
     }
+
     
     func configureConstrains() {
         NSLayoutConstraint.activate ([

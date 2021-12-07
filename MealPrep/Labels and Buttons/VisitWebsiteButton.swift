@@ -22,7 +22,7 @@ class VisitWebsiteButton: UIButton {
     
     func configure() {
         setTitle("Instructions", for: .normal)
-        backgroundColor = .systemIndigo
+        backgroundColor = .systemGreen
         layer.cornerRadius = 10
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         translatesAutoresizingMaskIntoConstraints = false

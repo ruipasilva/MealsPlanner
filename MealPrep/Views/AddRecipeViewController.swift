@@ -19,9 +19,46 @@ class AddRecipeViewController: UIViewController {
     
     var photoImage = UIImageView()
     var photoSymbol = UIImageView()
-    var titleTextfield = UITextField()
-    var ingredientsTextview = UITextView()
-    var instructionsTextview =  UITextView()
+    
+    private lazy var titleView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    var titleTextfield: UITextField = {
+       let textField = UITextField()
+        textField.placeholder = "Title"
+        textField.borderStyle = .none
+        textField.layer.cornerRadius = 5
+        textField.font = Fonts.font(size: 14, weight: .regular)
+        textField.textColor = .systemGray.withAlphaComponent(0.6)
+        textField.attributedPlaceholder = NSAttributedString(string: "Title", attributes: [.font: Fonts.font(size: 14, weight: .regular), .foregroundColor: UIColor.systemGray.withAlphaComponent(0.6)])
+        textField.returnKeyType = .done
+        return textField
+    }()
+    
+    
+    var ingredientsTextview: UITextView = {
+        let textView = UITextView()
+        textView.text = "Add ingredients here..."
+        textView.layer.cornerRadius = 5
+        textView.textColor = .systemGray.withAlphaComponent(0.6)
+        textView.font = Fonts.font(size: 14, weight: .regular)
+        textView.textContainerInset = .init(top: 5, left: 5, bottom: 0, right: 5)
+        textView.scrollIndicatorInsets = .init(top: 0, left: 0, bottom: 0, right: 15)
+        return textView
+    }()
+    var instructionsTextview: UITextView = {
+       let textView = UITextView()
+        textView.text = "Add instructions here..."
+        textView.layer.cornerRadius = 5
+        textView.textColor = .systemGray.withAlphaComponent(0.6)
+        textView.font = Fonts.font(size: 14, weight: .regular)
+        textView.textContainerInset = .init(top: 5, left: 5, bottom: 0, right: 5)
+        textView.scrollIndicatorInsets = .init(top: 0, left: 0, bottom: 0, right: 15)
+        return textView
+    }()
+    
     var titleLabel = SmallTitleLabel(frame: .zero)
     var ingredientsLabel = SmallTitleLabel(frame: .zero)
     var instructionsLabel = SmallTitleLabel(frame: .zero)
@@ -32,7 +69,6 @@ class AddRecipeViewController: UIViewController {
         addViews()
         configurePhotoView()
         configureLabels()
-        configureTextviews()
         configureLayout()
     }
     
@@ -55,7 +91,8 @@ class AddRecipeViewController: UIViewController {
         view.addSubview(photoImage)
         photoImage.addSubview(photoSymbol)
         view.addSubview(titleTextfield)
-        view.addSubview(titleLabel)
+        view.addSubview(titleView)
+        titleView.addSubview(titleLabel)
         view.addSubview(ingredientsLabel)
         view.addSubview(ingredientsTextview)
         view.addSubview(instructionsLabel)
@@ -88,22 +125,6 @@ class AddRecipeViewController: UIViewController {
         instructionsLabel.text = "INSTRUCTIONS"
         instructionsLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption2)
         instructionsLabel.textColor = .secondaryLabel
-    }
-    
-    func configureTextviews() {
-        titleTextfield.placeholder = "Title"
-        titleTextfield.backgroundColor = .systemBackground
-        titleTextfield.layer.cornerRadius = 5
-        
-        ingredientsTextview.text = "Add ingredients here..."
-        ingredientsTextview.textColor = UIColor.lightGray
-        ingredientsTextview.layer.cornerRadius = 5
-        ingredientsTextview.textContainerInset = .init(top: 12, left: 8, bottom: 8, right: 8)
-        
-        instructionsTextview.text = "Add Instructions here..."
-        instructionsTextview.textColor = UIColor.lightGray
-        instructionsLabel.layer.cornerRadius = 5
-        instructionsTextview.textContainerInset = .init(top: 12, left: 8, bottom: 8, right: 8)
     }
     
     func configureLayout() {
@@ -167,7 +188,7 @@ class AddRecipeViewController: UIViewController {
     
     @objc func didTapAdd() {
         if titleTextfield.hasText {
-            let recipe = MyRecipe(label: titleTextfield.text!, ingredients: ingredientsTextview.text!, instructions: instructionsTextview.text!)
+            let recipe = MyRecipe(label: titleTextfield.text!, ingredients: ingredientsTextview.text!, instructions: instructionsTextview.text!, foodImage: (photoSymbol.image ?? UIImage(named: "food-placeholder"))!)
             delegate?.addViewController(self, addNew: recipe)
             dismiss(animated: true, completion: nil)
         } else {
@@ -188,20 +209,22 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
         let actionSheet = UIAlertController(title: "Profile Picture",
                                             message: "How would you like to select a picture?",
                                             preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Cancel",
-                                            style: .cancel,
-                                            handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] _ in
+            self?.photoSymbol.isHidden = false
+        }))
         actionSheet.addAction(UIAlertAction(title: "Take Photo",
                                             style: .default,
                                             handler: { [weak self] _ in
             
             self?.presentCamera()
+            self?.photoSymbol.isHidden = true
             
         }))
         actionSheet.addAction(UIAlertAction(title: "Choose Photo",
                                             style: .default,
                                             handler: {[weak self] _ in
             self?.presentPhotoPicker()
+            self?.photoSymbol.isHidden = true
         }))
         
         present(actionSheet, animated: true)
@@ -235,7 +258,9 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true) {
+            self.photoSymbol.isHidden = false
+        }
     }
 }
 

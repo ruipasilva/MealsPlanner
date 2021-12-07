@@ -54,6 +54,7 @@ extension BookmarkedViewController: UITableViewDataSource, UITableViewDelegate, 
         let bookmarked = bookmarkedRecipes[indexPath.row]
         let vc = DetailExploreViewController()
         vc.uri = bookmarked.uri
+        vc.bookmarkButton.isHidden = true
         navigationController?.pushViewController(vc, animated: true)
     }
     

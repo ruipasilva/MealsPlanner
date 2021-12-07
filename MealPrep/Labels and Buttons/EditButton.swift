@@ -1,15 +1,13 @@
 //
-//  BookmarkButton.swift
+//  EditButton.swift
 //  MealPrep
 //
-//  Created by Rui Silva on 29/09/2021.
+//  Created by Rui Silva on 17/11/2021.
 //
 
 import UIKit
 
-class CustomBarButton: UIButton {
-    
-    var isBookmarked: Bool = false
+class EditButton: UIButton {
 
     var buttonImage: UIImage?
     var color: UIColor?
@@ -26,7 +24,6 @@ class CustomBarButton: UIButton {
         super.init(frame: .zero)
         self.buttonImage = buttonImage.withConfiguration(UIImage.SymbolConfiguration(textStyle: .title3))
         self.color = color
-        
         configure()
     }
     

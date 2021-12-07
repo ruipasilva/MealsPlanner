@@ -1,5 +1,5 @@
 //
-//  BackButton.swift
+//  BookmarkButton.swift
 //  MealPrep
 //
 //  Created by Rui Silva on 29/09/2021.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class BackButton: UIButton {
-    
+class BookmarkButton: UIButton {
+
     var buttonImage: UIImage?
     var color: UIColor?
 
@@ -23,6 +23,7 @@ class BackButton: UIButton {
     init(buttonImage: UIImage, color: UIColor) {
         super.init(frame: .zero)
         self.buttonImage = buttonImage.withConfiguration(UIImage.SymbolConfiguration(textStyle: .title3))
+    
         self.color = color
         configure()
     }
@@ -32,5 +33,5 @@ class BackButton: UIButton {
         imageView?.tintColor = color
         translatesAutoresizingMaskIntoConstraints = false
     }
-    
+
 }

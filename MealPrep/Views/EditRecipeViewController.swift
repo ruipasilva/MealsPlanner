@@ -19,6 +19,7 @@ class EditRecipeViewController: UIViewController, UITextFieldDelegate {
     var titleLabel = SmallTitleLabel(frame: .zero)
     var ingredientsLabel = SmallTitleLabel(frame: .zero)
     var instructionsLabel = SmallTitleLabel(frame: .zero)
+    var foodImage = UIImageView()
     
     var recipe: MyRecipe?
     
@@ -117,7 +118,7 @@ class EditRecipeViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func save() {
-        let recipe = MyRecipe(label: titleTextfield.text!, ingredients: ingredientsTextview.text!, instructions: instructionsTextview.text!)
+        let recipe = MyRecipe(label: titleTextfield.text!, ingredients: ingredientsTextview.text!, instructions: instructionsTextview.text!, foodImage: (foodImage.image ?? UIImage(named: "food-placeholder"))!)
         delegate?.editRecipeViewControllerDelegate(self, didChange: recipe)
         dismiss(animated: true, completion: nil)
     }

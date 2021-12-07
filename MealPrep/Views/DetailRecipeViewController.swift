@@ -14,9 +14,9 @@ class DetailRecipeViewController: UIViewController {
     var gradient: CAGradientLayer!
     
     var titleLabel = TitleLabel(frame: .zero)
-    var image = DetailImageView(frame: .zero)
-    let backButton = CustomBarButton(buttonImage: UIImage(systemName: "chevron.backward")!, color: .systemGreen)
-    let editButton = CustomBarButton(buttonImage: UIImage(systemName: "pencil")!, color: .systemGreen)
+    var foodImage = DetailImageView(frame: .zero)
+    let backButton = BackButton(buttonImage: UIImage(systemName: "chevron.backward")!, color: .systemGreen)
+    let editButton = EditButton(buttonImage: UIImage(systemName: "pencil")!, color: .systemGreen)
     let ingredientsLabel = MediumTitleLabel(frame: .zero)
     let instructionsLabel = SmallTitleLabel(frame: .zero)
     let ingredientsList = BodyLabel(frame: .zero)
@@ -46,7 +46,7 @@ class DetailRecipeViewController: UIViewController {
     }
     
     func addViews() {
-        view.addSubview(image)
+        view.addSubview(foodImage)
         view.addSubview(editButton)
         view.addSubview(backButton)
         view.addSubview(titleLabel)
@@ -83,10 +83,10 @@ class DetailRecipeViewController: UIViewController {
         
         
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: view.topAnchor, constant: -10),
-            image.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            image.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            image.heightAnchor.constraint(equalToConstant: 350),
+            foodImage.topAnchor.constraint(equalTo: view.topAnchor, constant: -10),
+            foodImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            foodImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            foodImage.heightAnchor.constraint(equalToConstant: 350),
             
             backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
@@ -98,7 +98,7 @@ class DetailRecipeViewController: UIViewController {
             editButton.heightAnchor.constraint(equalToConstant: 30),
             editButton.widthAnchor.constraint(equalToConstant: 30),
             
-            titleLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: foodImage.bottomAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             titleLabel.heightAnchor.constraint(equalToConstant: 30),
@@ -133,7 +133,7 @@ class DetailRecipeViewController: UIViewController {
     
     @objc func dismissVC() {
         let vc = EditRecipeViewController()
-        let recipe = MyRecipe(label: titleLabel.text ?? "Recipe Title", ingredients: ingredientsList.text ?? "Ingredients List", instructions: instructionsList.text ?? "Instructions List")
+        let recipe = MyRecipe(label: titleLabel.text ?? "Recipe Title", ingredients: ingredientsList.text ?? "Ingredients List", instructions: instructionsList.text ?? "Instructions List", foodImage: (foodImage.image ?? UIImage(named: "food-placeholder"))!)
         delegate?.editRecipeViewControllerDelegate(vc, didChange: recipe)
         navigationController?.popViewController(animated: true)
     }

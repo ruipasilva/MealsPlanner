@@ -13,6 +13,7 @@
 		6932A17F26F24A1B001D1CD6 /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6932A17E26F24A1B001D1CD6 /* ErrorMessages.swift */; };
 		6932A18126F2508F001D1CD6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6932A18026F2508F001D1CD6 /* NetworkManager.swift */; };
 		6932A18326F8C357001D1CD6 /* SpecificRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6932A18226F8C357001D1CD6 /* SpecificRecipe.swift */; };
+		693CF104274556A100076A88 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693CF103274556A100076A88 /* EditButton.swift */; };
 		695CE2762715E0A6001DEFC1 /* EditRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695CE2752715E0A6001DEFC1 /* EditRecipeViewController.swift */; };
 		6963490E26E6706A00CD715F /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6963490D26E6706A00CD715F /* HomeViewCell.swift */; };
 		6963495826E93B9200CD715F /* FavoritesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6963495726E93B9200CD715F /* FavoritesViewCell.swift */; };
@@ -21,9 +22,10 @@
 		696D38FC26FCD11C00C4AB84 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696D38FB26FCD11B00C4AB84 /* Extensions.swift */; };
 		696D38FE2700EA5C00C4AB84 /* MyRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696D38FD2700EA5C00C4AB84 /* MyRecipes.swift */; };
 		697CBE652704A4C700D19C42 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CBE642704A4C700D19C42 /* BackButton.swift */; };
-		697CBE672704AFF900D19C42 /* CustomBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CBE662704AFF900D19C42 /* CustomBarButton.swift */; };
+		697CBE672704AFF900D19C42 /* BookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CBE662704AFF900D19C42 /* BookmarkButton.swift */; };
 		697CBE692704CB6A00D19C42 /* SmallTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CBE682704CB6A00D19C42 /* SmallTitleLabel.swift */; };
 		697CBE6B2704D41300D19C42 /* BodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CBE6A2704D41300D19C42 /* BodyLabel.swift */; };
+		698ADF1D274EB72A0055D0B8 /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698ADF1C274EB72A0055D0B8 /* View+Ext.swift */; };
 		69955CE4270CC7EC00D3B3BB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 69955CE3270CC7EC00D3B3BB /* Realm */; };
 		69955CE6270CC7EC00D3B3BB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69955CE5270CC7EC00D3B3BB /* RealmSwift */; };
 		69A61888271E1E7B00E6BEFF /* MediumTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A61887271E1E7B00E6BEFF /* MediumTitleLabel.swift */; };
@@ -64,6 +66,7 @@
 		69F51A6026E3919000723FD6 /* BookmarkedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F51A5F26E3919000723FD6 /* BookmarkedViewController.swift */; };
 		69FA454726FB66EA00D56972 /* ExploreCellImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA454626FB66EA00D56972 /* ExploreCellImageView.swift */; };
 		69FA454926FB74B800D56972 /* DetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FA454826FB74B800D56972 /* DetailImageView.swift */; };
+		69FE2598274ED12500909BAC /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FE2597274ED12500909BAC /* Fonts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +76,7 @@
 		6932A17E26F24A1B001D1CD6 /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
 		6932A18026F2508F001D1CD6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6932A18226F8C357001D1CD6 /* SpecificRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRecipe.swift; sourceTree = "<group>"; };
+		693CF103274556A100076A88 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
 		695CE2752715E0A6001DEFC1 /* EditRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipeViewController.swift; sourceTree = "<group>"; };
 		6963490D26E6706A00CD715F /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		6963495726E93B9200CD715F /* FavoritesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewCell.swift; sourceTree = "<group>"; };
@@ -81,9 +85,10 @@
 		696D38FB26FCD11B00C4AB84 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		696D38FD2700EA5C00C4AB84 /* MyRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipes.swift; sourceTree = "<group>"; };
 		697CBE642704A4C700D19C42 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
-		697CBE662704AFF900D19C42 /* CustomBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarButton.swift; sourceTree = "<group>"; };
+		697CBE662704AFF900D19C42 /* BookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkButton.swift; sourceTree = "<group>"; };
 		697CBE682704CB6A00D19C42 /* SmallTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTitleLabel.swift; sourceTree = "<group>"; };
 		697CBE6A2704D41300D19C42 /* BodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyLabel.swift; sourceTree = "<group>"; };
+		698ADF1C274EB72A0055D0B8 /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		69A61887271E1E7B00E6BEFF /* MediumTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumTitleLabel.swift; sourceTree = "<group>"; };
 		69ABC6F8270B40A9006AE411 /* VisitWebsiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitWebsiteButton.swift; sourceTree = "<group>"; };
 		69BA4B622721F05C00EDF090 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +130,7 @@
 		69F51A5F26E3919000723FD6 /* BookmarkedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedViewController.swift; sourceTree = "<group>"; };
 		69FA454626FB66EA00D56972 /* ExploreCellImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCellImageView.swift; sourceTree = "<group>"; };
 		69FA454826FB74B800D56972 /* DetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageView.swift; sourceTree = "<group>"; };
+		69FE2597274ED12500909BAC /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +163,8 @@
 				6916EE7A26FB80E000F0B0E8 /* TitleLabel.swift */,
 				696D38F726FC8B9500C4AB84 /* AddToBookmarkButton.swift */,
 				697CBE642704A4C700D19C42 /* BackButton.swift */,
-				697CBE662704AFF900D19C42 /* CustomBarButton.swift */,
+				693CF103274556A100076A88 /* EditButton.swift */,
+				697CBE662704AFF900D19C42 /* BookmarkButton.swift */,
 				697CBE6A2704D41300D19C42 /* BodyLabel.swift */,
 				69ABC6F8270B40A9006AE411 /* VisitWebsiteButton.swift */,
 			);
@@ -202,6 +209,8 @@
 			isa = PBXGroup;
 			children = (
 				6932A17E26F24A1B001D1CD6 /* ErrorMessages.swift */,
+				69FE2597274ED12500909BAC /* Fonts.swift */,
+				698ADF1C274EB72A0055D0B8 /* View+Ext.swift */,
 				696D38FB26FCD11B00C4AB84 /* Extensions.swift */,
 				6932A18026F2508F001D1CD6 /* NetworkManager.swift */,
 				696D38F926FC929F00C4AB84 /* PersistanceManager.swift */,
@@ -387,6 +396,7 @@
 			files = (
 				6932A17726E97FDA001D1CD6 /* ExploreViewCell.swift in Sources */,
 				69F51A5A26E390C100723FD6 /* Recipe.swift in Sources */,
+				698ADF1D274EB72A0055D0B8 /* View+Ext.swift in Sources */,
 				69BA4B632721F05C00EDF090 /* AddRecipeViewController.swift in Sources */,
 				695CE2762715E0A6001DEFC1 /* EditRecipeViewController.swift in Sources */,
 				6963490E26E6706A00CD715F /* HomeViewCell.swift in Sources */,
@@ -402,6 +412,7 @@
 				69BCE565270F62AB00EE6AB4 /* IQBarButtonItem.swift in Sources */,
 				69BCE56F270F62AB00EE6AB4 /* IQKeyboardManager+Debug.swift in Sources */,
 				69BCE570270F62AB00EE6AB4 /* IQKeyboardManager+OrientationNotification.swift in Sources */,
+				693CF104274556A100076A88 /* EditButton.swift in Sources */,
 				69F51A5E26E3916400723FD6 /* ExploreViewController.swift in Sources */,
 				69BCE575270F62AB00EE6AB4 /* IQUIView+Hierarchy.swift in Sources */,
 				69F51A4826E2399700723FD6 /* SceneDelegate.swift in Sources */,
@@ -424,8 +435,9 @@
 				697CBE652704A4C700D19C42 /* BackButton.swift in Sources */,
 				69BCE56D270F62AB00EE6AB4 /* IQKeyboardReturnKeyHandler.swift in Sources */,
 				69BCE571270F62AB00EE6AB4 /* IQKeyboardManager+Toolbar.swift in Sources */,
+				69FE2598274ED12500909BAC /* Fonts.swift in Sources */,
 				6932A18326F8C357001D1CD6 /* SpecificRecipe.swift in Sources */,
-				697CBE672704AFF900D19C42 /* CustomBarButton.swift in Sources */,
+				697CBE672704AFF900D19C42 /* BookmarkButton.swift in Sources */,
 				69FA454726FB66EA00D56972 /* ExploreCellImageView.swift in Sources */,
 				69BCE567270F62AB00EE6AB4 /* IQUIView+IQKeyboardToolbar.swift in Sources */,
 				697CBE6B2704D41300D19C42 /* BodyLabel.swift in Sources */,
