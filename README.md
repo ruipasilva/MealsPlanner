@@ -2,6 +2,9 @@
 
 ### **Please note this is a work in progress**
 
+The current API only allows 10 calls per minute.
+
+
 ## Introduction
 
 This is my first app built in UIKit. I've focused on SwiftUI since the beginning but realised UIKit isn't going anywhere and is still crucial to iOS development.
