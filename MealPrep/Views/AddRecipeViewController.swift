@@ -20,20 +20,45 @@ class AddRecipeViewController: UIViewController {
     var photoImage = UIImageView()
     var photoSymbol = UIImageView()
     
+    lazy var contentViewSize = CGSize(width: view.frame.width, height: view.frame.height - 50)
+    
+    lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView(frame: .zero)
+        view.frame = view.bounds
+        scrollView.contentSize = contentViewSize
+        scrollView.autoresizingMask = .flexibleHeight
+        scrollView.bounces = true
+        return scrollView
+    }()
+    
+    lazy var contentView: UIView = {
+        let view = UIView()
+        view.frame.size = contentViewSize
+        return view
+    }()
+    
     private lazy var titleView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        return view
+    }()
+    
+    var titleTextfieldContainer: UIView = {
         let view = UIView()
         return view
     }()
     
     var titleTextfield: UITextField = {
-       let textField = UITextField()
+        let textField = UITextField()
+        textField.backgroundColor = .white
         textField.placeholder = "Title"
         textField.borderStyle = .none
         textField.layer.cornerRadius = 5
         textField.font = Fonts.font(size: 14, weight: .regular)
-        textField.textColor = .systemGray.withAlphaComponent(0.6)
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        textField.leftViewMode = .always
+        textField.returnKeyType = .continue
         textField.attributedPlaceholder = NSAttributedString(string: "Title", attributes: [.font: Fonts.font(size: 14, weight: .regular), .foregroundColor: UIColor.systemGray.withAlphaComponent(0.6)])
-        textField.returnKeyType = .done
         return textField
     }()
     
@@ -43,18 +68,20 @@ class AddRecipeViewController: UIViewController {
         textView.text = "Add ingredients here..."
         textView.layer.cornerRadius = 5
         textView.textColor = .systemGray.withAlphaComponent(0.6)
+        textView.returnKeyType = .default
         textView.font = Fonts.font(size: 14, weight: .regular)
-        textView.textContainerInset = .init(top: 5, left: 5, bottom: 0, right: 5)
+        textView.textContainerInset = .init(top: 6, left: 5, bottom: 0, right: 5)
         textView.scrollIndicatorInsets = .init(top: 0, left: 0, bottom: 0, right: 15)
         return textView
     }()
     var instructionsTextview: UITextView = {
-       let textView = UITextView()
+        let textView = UITextView()
         textView.text = "Add instructions here..."
         textView.layer.cornerRadius = 5
+        textView.returnKeyType = .default
         textView.textColor = .systemGray.withAlphaComponent(0.6)
         textView.font = Fonts.font(size: 14, weight: .regular)
-        textView.textContainerInset = .init(top: 5, left: 5, bottom: 0, right: 5)
+        textView.textContainerInset = .init(top: 6, left: 5, bottom: 0, right: 5)
         textView.scrollIndicatorInsets = .init(top: 0, left: 0, bottom: 0, right: 15)
         return textView
     }()
@@ -88,15 +115,18 @@ class AddRecipeViewController: UIViewController {
     }
     
     func addViews() {
-        view.addSubview(photoImage)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(photoImage)
         photoImage.addSubview(photoSymbol)
-        view.addSubview(titleTextfield)
-        view.addSubview(titleView)
+        contentView.addSubview(titleTextfieldContainer)
+        titleTextfieldContainer.addSubview(titleTextfield)
+        contentView.addSubview(titleView)
         titleView.addSubview(titleLabel)
-        view.addSubview(ingredientsLabel)
-        view.addSubview(ingredientsTextview)
-        view.addSubview(instructionsLabel)
-        view.addSubview(instructionsTextview)
+        contentView.addSubview(ingredientsLabel)
+        contentView.addSubview(ingredientsTextview)
+        contentView.addSubview(instructionsLabel)
+        contentView.addSubview(instructionsTextview)
     }
     
     func configurePhotoView() {
@@ -110,7 +140,7 @@ class AddRecipeViewController: UIViewController {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapPhoto))
         photoImage.isUserInteractionEnabled = true
         photoImage.addGestureRecognizer(gesture)
-
+        
     }
     
     func configureLabels() {
@@ -130,14 +160,18 @@ class AddRecipeViewController: UIViewController {
     func configureLayout() {
         photoImage.translatesAutoresizingMaskIntoConstraints = false
         photoSymbol.translatesAutoresizingMaskIntoConstraints = false
+        titleTextfieldContainer.translatesAutoresizingMaskIntoConstraints = false
         titleTextfield.translatesAutoresizingMaskIntoConstraints = false
         ingredientsTextview.translatesAutoresizingMaskIntoConstraints = false
         instructionsTextview.translatesAutoresizingMaskIntoConstraints = false
         
+        scrollView.setAnchors(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: view.bottomAnchor, topConstant: 0, leadingConstant: 0, trailingConstant: 0, bottomConstant: 0)
+        
+        
         NSLayoutConstraint.activate([
             
-            photoImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
-            photoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            photoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            photoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             photoImage.widthAnchor.constraint(equalToConstant: 160),
             photoImage.heightAnchor.constraint(equalToConstant: 160),
             
@@ -145,33 +179,38 @@ class AddRecipeViewController: UIViewController {
             photoSymbol.centerYAnchor.constraint(equalTo: photoImage.centerYAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: photoImage.bottomAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             titleLabel.heightAnchor.constraint(equalToConstant: 20),
             
-            titleTextfield.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3),
-            titleTextfield.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleTextfield.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            titleTextfield.heightAnchor.constraint(equalToConstant: 40),
+            titleTextfieldContainer.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3),
+            titleTextfieldContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            titleTextfieldContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            titleTextfieldContainer.heightAnchor.constraint(equalToConstant: 40),
             
-            ingredientsLabel.topAnchor.constraint(equalTo: titleTextfield.bottomAnchor, constant: 20),
-            ingredientsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            ingredientsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            titleTextfield.topAnchor.constraint(equalTo: titleTextfieldContainer.topAnchor),
+            titleTextfield.leadingAnchor.constraint(equalTo: titleTextfieldContainer.leadingAnchor),
+            titleTextfield.trailingAnchor.constraint(equalTo: titleTextfieldContainer.trailingAnchor),
+            titleTextfield.bottomAnchor.constraint(equalTo: titleTextfieldContainer.bottomAnchor),
+            
+            ingredientsLabel.topAnchor.constraint(equalTo: titleTextfieldContainer.bottomAnchor, constant: 20),
+            ingredientsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            ingredientsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             ingredientsLabel.heightAnchor.constraint(equalToConstant: 20),
             
             ingredientsTextview.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: 3),
-            ingredientsTextview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            ingredientsTextview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            ingredientsTextview.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            ingredientsTextview.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             ingredientsTextview.heightAnchor.constraint(equalToConstant: 200),
             
             instructionsLabel.topAnchor.constraint(equalTo: ingredientsTextview.bottomAnchor, constant: 20),
-            instructionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            instructionsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            instructionsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            instructionsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             instructionsLabel.heightAnchor.constraint(equalToConstant: 20),
             
             instructionsTextview.topAnchor.constraint(equalTo: instructionsLabel.bottomAnchor, constant: 3),
-            instructionsTextview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            instructionsTextview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            instructionsTextview.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            instructionsTextview.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             instructionsTextview.heightAnchor.constraint(equalToConstant: 200)
             
         ])
@@ -200,7 +239,29 @@ class AddRecipeViewController: UIViewController {
 }
 
 extension AddRecipeViewController: UITextFieldDelegate, UITextViewDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == titleTextfield {
+            ingredientsLabel.becomeFirstResponder()
+        }
+        textField.endEditing(true)
+        return true
+    }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == ingredientsTextview || textView.text == "Add ingredients here..." {
+            textView.text = ""
+        } else if textView == instructionsTextview || textView.text == "Add instructions here..." {
+            textView.text = ""
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView == ingredientsTextview || textView.text.isEmpty {
+            textView.text = "Add ingredients here..."
+        } else if textView == instructionsTextview || textView.text.isEmpty {
+            textView.text = "Add instructions here..."
+        }
+    }
 }
 
 extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
