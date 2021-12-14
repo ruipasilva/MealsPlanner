@@ -39,6 +39,7 @@ class HomeViewController: UIViewController {
         tableView.reloadData()
     }
     
+    
     func configureViewController() {
         title = "Recipes"
         view.backgroundColor = .systemBackground
@@ -95,16 +96,30 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailRecipeViewController()
         let recipe = recipes[indexPath.row]
+        print(recipe)
         vc.recipe = recipe
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else { return }
-        recipes.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .left)
-        saveRecipes()
+    //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    //        guard editingStyle == .delete else { return }
+    //        recipes.remove(at: indexPath.row)
+    //        tableView.deleteRows(at: [indexPath], with: .left)
+    //        saveRecipes()
+    //    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            // example of your delete function
+            self.recipes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.saveRecipes()
+        })
+        
+        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.backgroundColor = .systemRed
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 

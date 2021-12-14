@@ -47,7 +47,7 @@ class DetailRecipeViewController: UIViewController {
         return textField
     }()
     var foodImage = DetailImageView(frame: .zero)
-    let ingredientsLabel = SmallTitleLabel(frame: .zero)
+    let ingredientsLabel = MediumTitleLabel(frame: .zero)
     
     var ingredientsTextView: UITextView = {
         let textView = UITextView()
@@ -62,9 +62,21 @@ class DetailRecipeViewController: UIViewController {
         return textView
     }()
     
-    let instructionsLabel = SmallTitleLabel(frame: .zero)
+    let instructionsLabel = MediumTitleLabel(frame: .zero)
     
-    let instructionsList = BodyLabel(frame: .zero)
+    var instructionsTextView: UITextView = {
+        let textView = UITextView()
+        textView.isEditable = false
+        textView.text = "Add instructions here..."
+        textView.layer.cornerRadius = 5
+        textView.textColor = .systemGray
+        textView.returnKeyType = .default
+        textView.font = Fonts.font(size: 14, weight: .regular)
+        textView.textContainerInset = .init(top: 6, left: 5, bottom: 0, right: 5)
+        textView.scrollIndicatorInsets = .init(top: 0, left: 0, bottom: 0, right: 15)
+        return textView
+    }()
+    
     let visitWebsite = VisitWebsiteButton(frame: .zero)
     
     var recipe: MyRecipe?
@@ -87,8 +99,9 @@ class DetailRecipeViewController: UIViewController {
         contentView.addSubview(foodImage)
         contentView.addSubview(titleLabelTextfield)
         contentView.addSubview(ingredientsLabel)
-        contentView.addSubview(ingredientsScrollView)
         contentView.addSubview(ingredientsTextView)
+        contentView.addSubview(instructionsLabel)
+        contentView.addSubview(instructionsTextView)
     }
     
     func configureViewController() {
@@ -100,60 +113,76 @@ class DetailRecipeViewController: UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem = backButton
         
+        titleLabelTextfield.delegate = self
+        ingredientsTextView.delegate = self
+        instructionsTextView.delegate = self
     }
     
     func configureLabels() {
-        titleLabelTextfield.text = recipe?.label
-        ingredientsLabel.text = "INGREDIENTS"
-    
-        
+        ingredientsLabel.text = "Ingredients"
+        instructionsLabel.text = "Instructions"
     }
     
     func configureTextViews() {
-        ingredientsTextView.text = recipe?.ingredients ?? "You haven't added any ingredients yet"
+        titleLabelTextfield.text = recipe?.label
+        ingredientsTextView.text = recipe?.ingredients ?? "Tap edit to add ingredients here"
+        instructionsTextView.text = recipe?.instructions ?? "Tap edit to add instructions here"
     }
     
     func configureLayout() {
-        ingredientsScrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        ingredientsLabel.translatesAutoresizingMaskIntoConstraints = false
         ingredientsView.translatesAutoresizingMaskIntoConstraints = false
         ingredientsTextView.translatesAutoresizingMaskIntoConstraints = false
         titleLabelTextfield.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         scrollView.setAnchors(top: view.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: view.bottomAnchor, topConstant: 0, leadingConstant: 0, trailingConstant: 0, bottomConstant: 0)
         
         foodImage.setAnchors(top: contentView.topAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 0, leadingConstant: 0, trailingConstant: 0, bottomConstant: nil)
         foodImage.setAnchorSize(width: nil, height: 300)
         
-        titleLabelTextfield.setAnchors(top: foodImage.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 0, bottomConstant: nil)
+        titleLabelTextfield.setAnchors(top: foodImage.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
         titleLabelTextfield.setAnchorSize(width: nil, height: 30)
         
+        ingredientsLabel.setAnchors(top: titleLabelTextfield.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
+        ingredientsLabel.setAnchorSize(width: nil, height: 30)
         
-        NSLayoutConstraint.activate([
-            
-            ingredientsLabel.topAnchor.constraint(equalTo: titleLabelTextfield.topAnchor, constant: 50),
-            ingredientsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            ingredientsLabel.widthAnchor.constraint(equalToConstant: 150),
-            
-            
-            ingredientsTextView.topAnchor.constraint(equalTo: ingredientsLabel.topAnchor),
-            ingredientsTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            ingredientsTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            ingredientsTextView.heightAnchor.constraint(equalToConstant: 250)
-        ])
+        ingredientsTextView.setAnchors(top: ingredientsLabel.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
+        ingredientsTextView.setAnchorSize(width: nil, height: 150)
+        
+        instructionsLabel.setAnchors(top: ingredientsTextView.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
+        instructionsLabel.setAnchorSize(width: nil, height: 30)
+        
+        instructionsTextView.setAnchors(top: instructionsLabel.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
+        instructionsTextView.setAnchorSize(width: nil, height: 150)
+ 
     }
     
     @objc func edit() {
         titleLabelTextfield.isEnabled = true
+        titleLabelTextfield.backgroundColor = .systemGray.withAlphaComponent(0.05)
+        
         ingredientsTextView.isEditable = true
+        ingredientsTextView.backgroundColor = .systemGray.withAlphaComponent(0.05)
+        
+        instructionsTextView.isEditable = true
+        instructionsTextView.backgroundColor = .systemGray.withAlphaComponent(0.05)
+        
         titleLabelTextfield.becomeFirstResponder()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(save))
     }
     
     @objc func save() {
         titleLabelTextfield.isEnabled = false
+        titleLabelTextfield.backgroundColor = .white
+        
         ingredientsTextView.isEditable = false
-        let recipe = MyRecipe(label: titleLabelTextfield.text ?? "No title", ingredients: ingredientsLabel.text ?? "", instructions: instructionsLabel.text ?? "")
+        ingredientsTextView.backgroundColor = .white
+        
+        instructionsTextView.isEditable = false
+        instructionsTextView.backgroundColor = .white
+        
+        let recipe = MyRecipe(label: titleLabelTextfield.text ?? "No title", ingredients: ingredientsTextView.text ?? "", instructions: instructionsTextView.text ?? "")
         delegate?.detailRecipeViewControllerDelegate(self, didChange: recipe)
     }
     
@@ -164,4 +193,27 @@ class DetailRecipeViewController: UIViewController {
 
 
 extension DetailRecipeViewController: UITextViewDelegate, UITextFieldDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == ingredientsTextView && textView.text == "Add ingredients here..." {
+            textView.text = ""
+            textView.textColor = .black
+        }
+        
+        if textView == instructionsTextView && textView.text == "Add instructions here..." {
+            textView.text = ""
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView == ingredientsTextView && textView.text.isEmpty {
+            textView.text = "Add ingredients here..."
+            textView.textColor = .systemGray.withAlphaComponent(0.6)
+        }
+        
+        if textView == instructionsTextView && textView.text.isEmpty {
+            textView.text = "Add instructions here..."
+            textView.textColor = .systemGray.withAlphaComponent(0.6)
+        }
+    }
 }

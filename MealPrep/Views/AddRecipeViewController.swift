@@ -106,6 +106,8 @@ class AddRecipeViewController: UIViewController {
         view.backgroundColor = .secondarySystemBackground
         
         titleTextfield.delegate = self
+        titleTextfield.becomeFirstResponder()
+        
         ingredientsTextview.delegate = self
         instructionsTextview.delegate = self
         
@@ -227,7 +229,7 @@ class AddRecipeViewController: UIViewController {
     
     @objc func didTapAdd() {
         if titleTextfield.hasText {
-            let recipe = MyRecipe(label: titleTextfield.text!, ingredients: ingredientsTextview.text!, instructions: instructionsTextview.text!)
+            let recipe = MyRecipe(label: titleTextfield.text ?? "No title", ingredients: ingredientsTextview.text ?? "No Ingredients added", instructions: instructionsTextview.text ?? "No instructions added")
             delegate?.addViewController(self, addNew: recipe)
             dismiss(animated: true, completion: nil)
         } else {
@@ -248,20 +250,24 @@ extension AddRecipeViewController: UITextFieldDelegate, UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView == ingredientsTextview || textView.text == "Add ingredients here..." {
+        if textView == ingredientsTextview && textView.text == "Add ingredients here..." {
             textView.text = ""
             textView.textColor = .black
-        } else if textView == instructionsTextview || textView.text == "Add instructions here..." {
+        }
+        
+        if textView == instructionsTextview && textView.text == "Add instructions here..." {
             textView.text = ""
             textView.textColor = .black
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
+        if textView == ingredientsTextview && textView.text.isEmpty {
             textView.text = "Add ingredients here..."
             textView.textColor = .systemGray.withAlphaComponent(0.6)
-        } else if textView == instructionsTextview || textView.text.isEmpty {
+        }
+        
+        if textView == instructionsTextview && textView.text.isEmpty {
             textView.text = "Add instructions here..."
             textView.textColor = .systemGray.withAlphaComponent(0.6)
         }

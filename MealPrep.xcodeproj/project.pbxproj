@@ -14,7 +14,6 @@
 		6932A18126F2508F001D1CD6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6932A18026F2508F001D1CD6 /* NetworkManager.swift */; };
 		6932A18326F8C357001D1CD6 /* SpecificRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6932A18226F8C357001D1CD6 /* SpecificRecipe.swift */; };
 		693CF104274556A100076A88 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693CF103274556A100076A88 /* EditButton.swift */; };
-		695CE2762715E0A6001DEFC1 /* EditRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695CE2752715E0A6001DEFC1 /* EditRecipeViewController.swift */; };
 		6963490E26E6706A00CD715F /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6963490D26E6706A00CD715F /* HomeViewCell.swift */; };
 		6963495826E93B9200CD715F /* FavoritesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6963495726E93B9200CD715F /* FavoritesViewCell.swift */; };
 		696D38F826FC8B9500C4AB84 /* AddToBookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696D38F726FC8B9500C4AB84 /* AddToBookmarkButton.swift */; };
@@ -75,7 +74,6 @@
 		6932A18026F2508F001D1CD6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6932A18226F8C357001D1CD6 /* SpecificRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRecipe.swift; sourceTree = "<group>"; };
 		693CF103274556A100076A88 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
-		695CE2752715E0A6001DEFC1 /* EditRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipeViewController.swift; sourceTree = "<group>"; };
 		6963490D26E6706A00CD715F /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		6963495726E93B9200CD715F /* FavoritesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewCell.swift; sourceTree = "<group>"; };
 		696D38F726FC8B9500C4AB84 /* AddToBookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToBookmarkButton.swift; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 			children = (
 				69F51A5B26E3915600723FD6 /* HomeViewController.swift */,
 				69E622C4271371E500EC2CF4 /* DetailRecipeViewController.swift */,
-				695CE2752715E0A6001DEFC1 /* EditRecipeViewController.swift */,
 				69BA4B622721F05C00EDF090 /* AddRecipeViewController.swift */,
 				69F51A5D26E3916400723FD6 /* ExploreViewController.swift */,
 				6932A17B26F23EA1001D1CD6 /* DetailExploreViewController.swift */,
@@ -391,7 +388,6 @@
 				69F51A5A26E390C100723FD6 /* Recipe.swift in Sources */,
 				698ADF1D274EB72A0055D0B8 /* View+Ext.swift in Sources */,
 				69BA4B632721F05C00EDF090 /* AddRecipeViewController.swift in Sources */,
-				695CE2762715E0A6001DEFC1 /* EditRecipeViewController.swift in Sources */,
 				6963490E26E6706A00CD715F /* HomeViewCell.swift in Sources */,
 				6963495826E93B9200CD715F /* FavoritesViewCell.swift in Sources */,
 				69FA454926FB74B800D56972 /* DetailImageView.swift in Sources */,

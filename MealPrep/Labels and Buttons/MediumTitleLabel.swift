@@ -20,7 +20,7 @@ class MediumTitleLabel: UILabel {
 
     private func configure() {
         textColor = .label
-        font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
+        font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
         adjustsFontSizeToFitWidth = true
         numberOfLines = 3
         translatesAutoresizingMaskIntoConstraints = false
