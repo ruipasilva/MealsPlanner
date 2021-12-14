@@ -41,9 +41,9 @@ class DetailRecipeViewController: UIViewController {
         textField.placeholder = "Title"
         textField.borderStyle = .none
         textField.layer.cornerRadius = 5
-        textField.font = Fonts.font(size: 25, weight: .semibold)
+        textField.font = Fonts.font(size: 25, weight: .medium)
         textField.returnKeyType = .continue
-        textField.attributedPlaceholder = NSAttributedString(string: "Title", attributes: [.font: Fonts.font(size: 14, weight: .regular), .foregroundColor: UIColor.systemGray.withAlphaComponent(0.6)])
+        textField.attributedPlaceholder = NSAttributedString(string: "Title", attributes: [.font: Fonts.font(size: 16, weight: .regular), .foregroundColor: UIColor.systemGray.withAlphaComponent(0.6)])
         return textField
     }()
     var foodImage = DetailImageView(frame: .zero)
@@ -52,7 +52,8 @@ class DetailRecipeViewController: UIViewController {
     var ingredientsTextView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
-        textView.text = "Add ingredients here..."
+        textView.text = ("Add ingredients here...".replacingOccurrences(of: "\n", with: "\n • "))
+        textView.smartDashesType = .yes
         textView.layer.cornerRadius = 5
         textView.textColor = .systemGray
         textView.returnKeyType = .default
@@ -142,7 +143,7 @@ class DetailRecipeViewController: UIViewController {
         foodImage.setAnchorSize(width: nil, height: 300)
         
         titleLabelTextfield.setAnchors(top: foodImage.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
-        titleLabelTextfield.setAnchorSize(width: nil, height: 30)
+        titleLabelTextfield.setAnchorSize(width: nil, height: 50)
         
         ingredientsLabel.setAnchors(top: titleLabelTextfield.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
         ingredientsLabel.setAnchorSize(width: nil, height: 30)
@@ -160,13 +161,13 @@ class DetailRecipeViewController: UIViewController {
     
     @objc func edit() {
         titleLabelTextfield.isEnabled = true
-        titleLabelTextfield.backgroundColor = .systemGray.withAlphaComponent(0.05)
+        titleLabelTextfield.backgroundColor = .secondarySystemBackground.withAlphaComponent(0.3)
         
         ingredientsTextView.isEditable = true
-        ingredientsTextView.backgroundColor = .systemGray.withAlphaComponent(0.05)
+        ingredientsTextView.backgroundColor = .secondarySystemBackground.withAlphaComponent(0.3)
         
         instructionsTextView.isEditable = true
-        instructionsTextView.backgroundColor = .systemGray.withAlphaComponent(0.05)
+        instructionsTextView.backgroundColor = .secondarySystemBackground.withAlphaComponent(0.3)
         
         titleLabelTextfield.becomeFirstResponder()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(save))
@@ -174,16 +175,19 @@ class DetailRecipeViewController: UIViewController {
     
     @objc func save() {
         titleLabelTextfield.isEnabled = false
-        titleLabelTextfield.backgroundColor = .white
+        titleLabelTextfield.backgroundColor = .systemBackground
+        
         
         ingredientsTextView.isEditable = false
-        ingredientsTextView.backgroundColor = .white
+        ingredientsTextView.backgroundColor = .systemBackground
         
         instructionsTextView.isEditable = false
-        instructionsTextView.backgroundColor = .white
+        instructionsTextView.backgroundColor = .systemBackground
         
         let recipe = MyRecipe(label: titleLabelTextfield.text ?? "No title", ingredients: ingredientsTextView.text ?? "", instructions: instructionsTextView.text ?? "")
         delegate?.detailRecipeViewControllerDelegate(self, didChange: recipe)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(edit))
     }
     
     @objc func back() {
@@ -216,4 +220,23 @@ extension DetailRecipeViewController: UITextViewDelegate, UITextFieldDelegate {
             textView.textColor = .systemGray.withAlphaComponent(0.6)
         }
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == titleLabelTextfield {
+            ingredientsTextView.becomeFirstResponder()
+        }
+        textField.endEditing(true)
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            if (text == "\n") {
+                if range.location == textView.text.count {
+                    let updatedText: String = textView.text! + "\n - "
+                    textView.text = updatedText
+                }
+                return false
+            }
+            return true
+        }
 }

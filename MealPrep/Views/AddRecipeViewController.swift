@@ -65,7 +65,7 @@ class AddRecipeViewController: UIViewController {
     
     var ingredientsTextview: UITextView = {
         let textView = UITextView()
-        textView.text = "Add ingredients here..."
+        textView.text = "Add ingredients here...".replacingOccurrences(of: "\n", with: "\n • ")
         textView.layer.cornerRadius = 5
         textView.textColor = .systemGray.withAlphaComponent(0.6)
         textView.returnKeyType = .default
@@ -251,12 +251,12 @@ extension AddRecipeViewController: UITextFieldDelegate, UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == ingredientsTextview && textView.text == "Add ingredients here..." {
-            textView.text = ""
+            textView.text = " - "
             textView.textColor = .black
         }
         
         if textView == instructionsTextview && textView.text == "Add instructions here..." {
-            textView.text = ""
+            textView.text = " - "
             textView.textColor = .black
         }
     }
@@ -272,6 +272,17 @@ extension AddRecipeViewController: UITextFieldDelegate, UITextViewDelegate {
             textView.textColor = .systemGray.withAlphaComponent(0.6)
         }
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            if (text == "\n") {
+                if range.location == textView.text.count {
+                    let updatedText: String = textView.text! + "\n - "
+                    textView.text = updatedText
+                }
+                return false
+            }
+            return true
+        }
 }
 
 extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
