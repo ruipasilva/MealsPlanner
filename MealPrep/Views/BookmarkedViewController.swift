@@ -27,7 +27,7 @@ class BookmarkedViewController: UIViewController {
         title = "Favorites"
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        navigationController?.navigationBar.tintColor = .systemIndigo
+        navigationController?.navigationBar.tintColor = .systemGreen
     }
     
     func getBookmarkedRecipes()  {

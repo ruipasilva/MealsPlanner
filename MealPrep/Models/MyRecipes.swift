@@ -13,12 +13,10 @@ struct MyRecipe: Codable {
     var label: String
     var ingredients: String
     var instructions: String
-    var foodImage: Data
     
-    init(label: String, ingredients: String, instructions: String, foodImage: UIImage) {
+    init(label: String, ingredients: String, instructions: String) {
         self.label = label
         self.ingredients = ingredients
         self.instructions = instructions
-        self.foodImage = foodImage.pngData()!
     }
 }

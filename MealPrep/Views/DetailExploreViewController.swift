@@ -15,10 +15,10 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     var ingredientsView = UIView()
     var gradient: CAGradientLayer!
     
+    
     private var titleLabel = TitleLabel(frame: .zero)
     private var image = DetailImageView(frame: .zero)
     private var addToBookmark = AddToBookmarkButton(background: .systemBlue, title: "Bookmark")
-    private let backButton = BackButton(buttonImage: UIImage(systemName: "chevron.backward")!, color: .white)
     var bookmarkButton = BookmarkButton(buttonImage: UIImage(systemName: "bookmark")!, color: .white)
     private let ingredientsLabel = MediumTitleLabel(frame: .zero)
     private let ingredientsList = BodyLabel(frame: .zero)
@@ -42,7 +42,8 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = .white
     }
     
     override func viewDidLayoutSubviews() {
@@ -56,7 +57,6 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
         view.addSubview(ingredientsScrollView)
         ingredientsScrollView.addSubview(ingredientsView)
         ingredientsView.addSubview(ingredientsList)
-        view.addSubview(backButton)
         view.addSubview(bookmarkButton)
         view.addSubview(titleLabel)
         view.addSubview(ingredientsLabel)
@@ -64,16 +64,9 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
-        
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.isHidden = true
- 
-        ingredientsScrollView.translatesAutoresizingMaskIntoConstraints = false
-        ingredientsView.translatesAutoresizingMaskIntoConstraints = false
-        ingredientsList.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(back))
+        navigationItem.leftBarButtonItem = backButton
+
     }
     
     func configureImageGradient() {
@@ -87,7 +80,6 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     }
     
     func configureButtons() {
-        backButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         bookmarkButton.addTarget(self, action: #selector(bookmark), for: .touchUpInside)
         visitWebsite.addTarget(self, action: #selector(visitWebsiteButtonTapped), for: .touchUpInside)
     }
@@ -96,6 +88,10 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
         ingredientsLabel.text = "INGREDIENTS"
     }
 
+    
+    @objc func back() {
+        navigationController?.popViewController(animated: true)
+    }
     
     @objc func visitWebsiteButtonTapped() {
       
@@ -171,22 +167,21 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
 
     
     func configureConstrains() {
+        
+        ingredientsScrollView.translatesAutoresizingMaskIntoConstraints = false
+        ingredientsView.translatesAutoresizingMaskIntoConstraints = false
+        ingredientsList.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate ([
             image.topAnchor.constraint(equalTo: view.topAnchor, constant: -10),
             image.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             image.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             image.heightAnchor.constraint(equalToConstant: 350),
             
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            backButton.heightAnchor.constraint(equalToConstant: 30),
-            backButton.widthAnchor.constraint(equalToConstant: 30),
-            
             bookmarkButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             bookmarkButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             bookmarkButton.heightAnchor.constraint(equalToConstant: 30),
             bookmarkButton.widthAnchor.constraint(equalToConstant: 30),
-            
             
             titleLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),

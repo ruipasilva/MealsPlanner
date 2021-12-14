@@ -103,12 +103,12 @@ class AddRecipeViewController: UIViewController {
     func configureViewController() {
         
         title = "New Recipe"
+        view.backgroundColor = .secondarySystemBackground
         
         titleTextfield.delegate = self
         ingredientsTextview.delegate = self
         instructionsTextview.delegate = self
         
-        view.backgroundColor = .secondarySystemBackground
         navigationController?.navigationBar.tintColor = .systemGreen
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(didTapAdd))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(didTapCancel))
@@ -227,7 +227,7 @@ class AddRecipeViewController: UIViewController {
     
     @objc func didTapAdd() {
         if titleTextfield.hasText {
-            let recipe = MyRecipe(label: titleTextfield.text!, ingredients: ingredientsTextview.text!, instructions: instructionsTextview.text!, foodImage: (photoSymbol.image ?? UIImage(named: "food-placeholder"))!)
+            let recipe = MyRecipe(label: titleTextfield.text!, ingredients: ingredientsTextview.text!, instructions: instructionsTextview.text!)
             delegate?.addViewController(self, addNew: recipe)
             dismiss(animated: true, completion: nil)
         } else {
@@ -250,16 +250,20 @@ extension AddRecipeViewController: UITextFieldDelegate, UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == ingredientsTextview || textView.text == "Add ingredients here..." {
             textView.text = ""
+            textView.textColor = .black
         } else if textView == instructionsTextview || textView.text == "Add instructions here..." {
             textView.text = ""
+            textView.textColor = .black
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView == ingredientsTextview || textView.text.isEmpty {
+        if textView.text.isEmpty {
             textView.text = "Add ingredients here..."
+            textView.textColor = .systemGray.withAlphaComponent(0.6)
         } else if textView == instructionsTextview || textView.text.isEmpty {
             textView.text = "Add instructions here..."
+            textView.textColor = .systemGray.withAlphaComponent(0.6)
         }
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class SmallTitleLabel: UILabel {
     
-    var titleLabel: String!
+    var titleLabel: String?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
