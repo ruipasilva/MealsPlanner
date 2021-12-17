@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 import SafariServices
 
 class DetailExploreViewController: UIViewController, UIViewControllerTransitioningDelegate {
@@ -16,10 +15,10 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     var gradient: CAGradientLayer!
     
     
-    private var titleLabel = TitleLabel(frame: .zero)
-    private var image = DetailImageView(frame: .zero)
-    private var addToBookmark = AddToBookmarkButton(background: .systemBlue, title: "Bookmark")
-    var bookmarkButton = BookmarkButton(buttonImage: UIImage(systemName: "bookmark")!, color: .white)
+    private lazy var titleLabel = TitleLabel(frame: .zero)
+    private lazy  var image = DetailImageView(frame: .zero)
+    lazy var closeButton = CloseButton(buttonImage: UIImage(systemName: "xmark")!, color: .white)
+    lazy var bookmarkButton = BookmarkButton(buttonImage: UIImage(systemName: "bookmark")!, color: .white)
     private let ingredientsLabel = MediumTitleLabel(frame: .zero)
     private let ingredientsList = BodyLabel(frame: .zero)
     private let visitWebsite = VisitWebsiteButton(frame: .zero)
@@ -43,7 +42,7 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = .white
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -57,6 +56,7 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
         view.addSubview(ingredientsScrollView)
         ingredientsScrollView.addSubview(ingredientsView)
         ingredientsView.addSubview(ingredientsList)
+        view.addSubview(closeButton)
         view.addSubview(bookmarkButton)
         view.addSubview(titleLabel)
         view.addSubview(ingredientsLabel)
@@ -64,9 +64,6 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(back))
-        navigationItem.leftBarButtonItem = backButton
-
     }
     
     func configureImageGradient() {
@@ -80,17 +77,13 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     }
     
     func configureButtons() {
+        closeButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         bookmarkButton.addTarget(self, action: #selector(bookmark), for: .touchUpInside)
         visitWebsite.addTarget(self, action: #selector(visitWebsiteButtonTapped), for: .touchUpInside)
     }
     
     func configureLabels() {
         ingredientsLabel.text = "INGREDIENTS"
-    }
-
-    
-    @objc func back() {
-        navigationController?.popViewController(animated: true)
     }
     
     @objc func visitWebsiteButtonTapped() {
@@ -128,7 +121,7 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     }
     
     @objc func dismissVC() {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func bookmark() {
@@ -154,7 +147,7 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
                     }
                     DispatchQueue.main.async {
                         
-                        let alertVC = UIAlertController(title: "Oops", message: "You've already bookmarked this Recipe", preferredStyle: .alert)
+                        let alertVC = UIAlertController(title: "Oops", message: "You've already bookmarked this Recipe. \n Please remove it from the bookmark tab", preferredStyle: .alert)
                         alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                         self.present(alertVC, animated: true)
                     }
@@ -177,6 +170,11 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
             image.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             image.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             image.heightAnchor.constraint(equalToConstant: 350),
+            
+            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            closeButton.heightAnchor.constraint(equalToConstant: 30),
+            closeButton.widthAnchor.constraint(equalToConstant: 30),
             
             bookmarkButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             bookmarkButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),

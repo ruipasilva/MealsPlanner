@@ -251,12 +251,12 @@ extension AddRecipeViewController: UITextFieldDelegate, UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == ingredientsTextview && textView.text == "Add ingredients here..." {
-            textView.text = " - "
+            textView.text = " • "
             textView.textColor = .black
         }
         
         if textView == instructionsTextview && textView.text == "Add instructions here..." {
-            textView.text = " - "
+            textView.text = " • "
             textView.textColor = .black
         }
     }
@@ -276,7 +276,7 @@ extension AddRecipeViewController: UITextFieldDelegate, UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
             if (text == "\n") {
                 if range.location == textView.text.count {
-                    let updatedText: String = textView.text! + "\n - "
+                    let updatedText: String = textView.text! + "\n • "
                     textView.text = updatedText
                 }
                 return false

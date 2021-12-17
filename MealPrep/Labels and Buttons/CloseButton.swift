@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BackButton: UIButton {
+class CloseButton: UIButton {
     
     var buttonImage: UIImage?
     var color: UIColor?

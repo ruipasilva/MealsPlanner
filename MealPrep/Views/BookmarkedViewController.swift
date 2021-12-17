@@ -55,6 +55,9 @@ extension BookmarkedViewController: UITableViewDataSource, UITableViewDelegate, 
         let vc = DetailExploreViewController()
         vc.uri = bookmarked.uri
         vc.bookmarkButton.isHidden = true
+        vc.closeButton.isHidden = true
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.pushViewController(vc, animated: true)
     }
     

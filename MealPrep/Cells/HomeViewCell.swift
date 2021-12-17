@@ -18,5 +18,4 @@ class HomeViewCell: UITableViewCell {
     func set(title: String) {
         label.text = title
     }
-
 }

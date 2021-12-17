@@ -75,7 +75,8 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
         print(recentResults)
         let vc = DetailExploreViewController()
         vc.uri = result.recipe.uri
-        navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.present(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -97,10 +98,10 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             let currentIndex = 0
             cell.titleLabel.text = results.recipe.label
             cell.titleLabel.textColor = .label
-    
-    
+            
+            
             cell.titleLabel.adjustsFontSizeToFitWidth = true
-        
+            
             cell.titleLabel.numberOfLines = 2
             
             cell.imageLabel.downloadImages(from: results.recipe.image!)
@@ -112,19 +113,19 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             
             
         } else {
-        
-        let results = results.hits[indexPath.item]
-        let currentIndex = 0
-        
-        cell.titleLabel.text = results.recipe.label
-        cell.titleLabel.textColor = .label
-        cell.titleLabel.numberOfLines = 2
-        
-        cell.imageLabel.downloadImages(from: results.recipe.image!)
-        cell.imageLabel.layer.cornerRadius = 2
-        
-        cell.cousineTypeLabel.textColor = .secondaryLabel
-        cell.cousineTypeLabel.text = results.recipe.cuisineType?[currentIndex].capitalized
+            
+            let results = results.hits[indexPath.item]
+            let currentIndex = 0
+            
+            cell.titleLabel.text = results.recipe.label
+            cell.titleLabel.textColor = .label
+            cell.titleLabel.numberOfLines = 2
+            
+            cell.imageLabel.downloadImages(from: results.recipe.image!)
+            cell.imageLabel.layer.cornerRadius = 2
+            
+            cell.cousineTypeLabel.textColor = .secondaryLabel
+            cell.cousineTypeLabel.text = results.recipe.cuisineType?[currentIndex].capitalized
         }
         return cell
     }
@@ -135,7 +136,7 @@ extension ExploreViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let recipe = searchBarController.searchBar.text {
             timer?.invalidate()
-
+            
             timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
                 self.showLoadingView()
                 NetworkManager.shared.getRecipes(for: recipe) { [weak self] result in

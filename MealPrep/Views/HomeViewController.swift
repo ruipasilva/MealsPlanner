@@ -31,6 +31,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         configureViewController()
         getRecipes()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -52,7 +52,7 @@ class DetailRecipeViewController: UIViewController {
     var ingredientsTextView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
-        textView.text = ("Add ingredients here...".replacingOccurrences(of: "\n", with: "\n • "))
+        textView.text = "Add ingredients here..."
         textView.smartDashesType = .yes
         textView.layer.cornerRadius = 5
         textView.textColor = .systemGray
@@ -199,12 +199,12 @@ class DetailRecipeViewController: UIViewController {
 extension DetailRecipeViewController: UITextViewDelegate, UITextFieldDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == ingredientsTextView && textView.text == "Add ingredients here..." {
-            textView.text = ""
+            textView.text = " • "
             textView.textColor = .black
         }
         
         if textView == instructionsTextView && textView.text == "Add instructions here..." {
-            textView.text = ""
+            textView.text = " • "
             textView.textColor = .black
         }
     }
@@ -232,7 +232,7 @@ extension DetailRecipeViewController: UITextViewDelegate, UITextFieldDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
             if (text == "\n") {
                 if range.location == textView.text.count {
-                    let updatedText: String = textView.text! + "\n - "
+                    let updatedText: String = textView.text! + "\n • "
                     textView.text = updatedText
                 }
                 return false

@@ -20,7 +20,7 @@
 		696D38FA26FC929F00C4AB84 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696D38F926FC929F00C4AB84 /* PersistanceManager.swift */; };
 		696D38FC26FCD11C00C4AB84 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696D38FB26FCD11B00C4AB84 /* Extensions.swift */; };
 		696D38FE2700EA5C00C4AB84 /* MyRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696D38FD2700EA5C00C4AB84 /* MyRecipes.swift */; };
-		697CBE652704A4C700D19C42 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CBE642704A4C700D19C42 /* BackButton.swift */; };
+		697CBE652704A4C700D19C42 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CBE642704A4C700D19C42 /* CloseButton.swift */; };
 		697CBE672704AFF900D19C42 /* BookmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CBE662704AFF900D19C42 /* BookmarkButton.swift */; };
 		697CBE692704CB6A00D19C42 /* SmallTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CBE682704CB6A00D19C42 /* SmallTitleLabel.swift */; };
 		697CBE6B2704D41300D19C42 /* BodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CBE6A2704D41300D19C42 /* BodyLabel.swift */; };
@@ -80,7 +80,7 @@
 		696D38F926FC929F00C4AB84 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		696D38FB26FCD11B00C4AB84 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		696D38FD2700EA5C00C4AB84 /* MyRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipes.swift; sourceTree = "<group>"; };
-		697CBE642704A4C700D19C42 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		697CBE642704A4C700D19C42 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		697CBE662704AFF900D19C42 /* BookmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkButton.swift; sourceTree = "<group>"; };
 		697CBE682704CB6A00D19C42 /* SmallTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTitleLabel.swift; sourceTree = "<group>"; };
 		697CBE6A2704D41300D19C42 /* BodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyLabel.swift; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 				69A61887271E1E7B00E6BEFF /* MediumTitleLabel.swift */,
 				6916EE7A26FB80E000F0B0E8 /* TitleLabel.swift */,
 				696D38F726FC8B9500C4AB84 /* AddToBookmarkButton.swift */,
-				697CBE642704A4C700D19C42 /* BackButton.swift */,
+				697CBE642704A4C700D19C42 /* CloseButton.swift */,
 				693CF103274556A100076A88 /* EditButton.swift */,
 				697CBE662704AFF900D19C42 /* BookmarkButton.swift */,
 				697CBE6A2704D41300D19C42 /* BodyLabel.swift */,
@@ -421,7 +421,7 @@
 				69BCE56C270F62AB00EE6AB4 /* IQKeyboardManager+Position.swift in Sources */,
 				69BCE56E270F62AB00EE6AB4 /* IQKeyboardManager.swift in Sources */,
 				697CBE692704CB6A00D19C42 /* SmallTitleLabel.swift in Sources */,
-				697CBE652704A4C700D19C42 /* BackButton.swift in Sources */,
+				697CBE652704A4C700D19C42 /* CloseButton.swift in Sources */,
 				69BCE56D270F62AB00EE6AB4 /* IQKeyboardReturnKeyHandler.swift in Sources */,
 				69BCE571270F62AB00EE6AB4 /* IQKeyboardManager+Toolbar.swift in Sources */,
 				69FE2598274ED12500909BAC /* Fonts.swift in Sources */,
