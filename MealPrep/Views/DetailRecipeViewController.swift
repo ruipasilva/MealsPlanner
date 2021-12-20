@@ -110,10 +110,7 @@ class DetailRecipeViewController: UIViewController {
         
         let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(edit))
         navigationItem.rightBarButtonItem = editButton
-        
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(back))
-        navigationItem.leftBarButtonItem = backButton
-        
+
         titleLabelTextfield.delegate = self
         ingredientsTextView.delegate = self
         instructionsTextView.delegate = self
@@ -177,7 +174,6 @@ class DetailRecipeViewController: UIViewController {
         titleLabelTextfield.isEnabled = false
         titleLabelTextfield.backgroundColor = .systemBackground
         
-        
         ingredientsTextView.isEditable = false
         ingredientsTextView.backgroundColor = .systemBackground
         
@@ -188,10 +184,6 @@ class DetailRecipeViewController: UIViewController {
         delegate?.detailRecipeViewControllerDelegate(self, didChange: recipe)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(edit))
-    }
-    
-    @objc func back() {
-        navigationController?.popViewController(animated: true)
     }
 }
 

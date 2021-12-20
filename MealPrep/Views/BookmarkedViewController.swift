@@ -58,6 +58,7 @@ extension BookmarkedViewController: UITableViewDataSource, UITableViewDelegate, 
         vc.closeButton.isHidden = true
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.barStyle = .black
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -78,21 +79,43 @@ extension BookmarkedViewController: UITableViewDataSource, UITableViewDelegate, 
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else { return }
-        let bookmarked = bookmarkedRecipes[indexPath.row]
-        bookmarkedRecipes.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .left)
-        
-        PersistanceManager.updateWith(bookmarked: bookmarked, actionType: .remove) { [weak self] error in
-            guard let self = self else { return }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            // example of your delete function
+            let bookmarked = self.bookmarkedRecipes[indexPath.row]
+            self.bookmarkedRecipes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
             
-            guard let error = error else { return }
-            let alertVC = UIAlertController(title: "Something went wrong", message: error.rawValue, preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alertVC, animated: true)
-        }
+            PersistanceManager.updateWith(bookmarked: bookmarked, actionType: .remove) { [weak self] error in
+                guard let self = self else { return }
+                
+                guard let error = error else { return }
+                let alertVC = UIAlertController(title: "Something went wrong", message: error.rawValue, preferredStyle: .alert)
+                alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alertVC, animated: true)
+            }
+        })
+        
+        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.backgroundColor = .systemRed
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        guard editingStyle == .delete else { return }
+//        let bookmarked = bookmarkedRecipes[indexPath.row]
+//        bookmarkedRecipes.remove(at: indexPath.row)
+//        tableView.deleteRows(at: [indexPath], with: .left)
+//        
+//        PersistanceManager.updateWith(bookmarked: bookmarked, actionType: .remove) { [weak self] error in
+//            guard let self = self else { return }
+//            
+//            guard let error = error else { return }
+//            let alertVC = UIAlertController(title: "Something went wrong", message: error.rawValue, preferredStyle: .alert)
+//            alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//            self.present(alertVC, animated: true)
+//        }
+//    }
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         if let indexPath = tableView.indexPathForSelectedRow {

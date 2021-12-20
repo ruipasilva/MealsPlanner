@@ -42,7 +42,11 @@ class DetailExploreViewController: UIViewController, UIViewControllerTransitioni
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
     }
     
     override func viewDidLayoutSubviews() {

@@ -100,6 +100,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
         print(recipe)
         vc.recipe = recipe
         vc.delegate = self
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.tintColor = .systemGreen
         navigationController?.pushViewController(vc, animated: true)
     }
     

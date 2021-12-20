@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITabBar.appearance().tintColor = .systemGreen
         IQKeyboardManager.shared.enable = true
-        FirebaseApp.configure()
         return true
     }
 
