@@ -17,4 +17,6 @@ struct RecipeInfo: Codable, Hashable {
     var image: String?
     var url: String?
     var ingredientLines: [String]?
+    var cuisineType: [String]?
+    var healthLabels: [String]?
 }

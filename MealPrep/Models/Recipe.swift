@@ -17,7 +17,7 @@ struct Hits: Codable {
 
 struct Recipe: Codable, Hashable {
     var uri: String?
-    var label: String
+    var label: String?
     var image: String?
     var cuisineType: [String]?
 }

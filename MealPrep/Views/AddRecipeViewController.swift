@@ -11,7 +11,7 @@ protocol AddViewControllerDelegate: AnyObject {
     func addViewController(_ vc: AddRecipeViewController, addNew recipe: MyRecipe)
 }
 
-class AddRecipeViewController: UIViewController {
+class AddRecipeViewController: UIViewController{
     
     var recipe: MyRecipe?
     
@@ -285,41 +285,46 @@ extension AddRecipeViewController: UITextFieldDelegate, UITextViewDelegate {
         }
 }
 
+//extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigationBarDelegate {
+//
+//    func showImagePickerController() {
+//        let imagePickerController = UIImagePickerController()
+//        imagePickerController.delegate = self
+//        present(imagePickerController, animated: true, completion: nil)
+//
+//    }
+//}
+
 extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-    
+
     func presentPhotoActionSheet() {
         let actionSheet = UIAlertController(title: "Profile Picture",
                                             message: "How would you like to select a picture?",
                                             preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] _ in
-            self?.photoSymbol.isHidden = false
-        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         actionSheet.addAction(UIAlertAction(title: "Take Photo",
                                             style: .default,
                                             handler: { [weak self] _ in
-            
+
             self?.presentCamera()
-            self?.photoSymbol.isHidden = true
-            
+
         }))
         actionSheet.addAction(UIAlertAction(title: "Choose Photo",
                                             style: .default,
                                             handler: {[weak self] _ in
             self?.presentPhotoPicker()
-            self?.photoSymbol.isHidden = true
         }))
-        
+
         present(actionSheet, animated: true)
     }
-    
+
     func presentCamera() {
         let vc = UIImagePickerController()
         vc.sourceType = .camera
         vc.delegate = self
-        vc.allowsEditing = true
         present(vc, animated: true)
     }
-    
+
     func presentPhotoPicker() {
         let vc = UIImagePickerController()
         vc.sourceType = .photoLibrary
@@ -327,23 +332,23 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
         vc.allowsEditing = true
         present(vc, animated: true)
     }
-    
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         print(info)
-        
+
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
         }
-        
+        self.photoSymbol.isHidden = true
         self.photoImage.image = selectedImage
     }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true) {
-            self.photoSymbol.isHidden = false
-        }
-    }
+
+//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+//        picker.dismiss(animated: true) {
+//            self.photoSymbol.isHidden = false
+//        }
+//    }
 }
 
 

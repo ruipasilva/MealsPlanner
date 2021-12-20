@@ -17,7 +17,7 @@ class DetailRecipeViewController: UIViewController {
     var ingredientsView = UIView()
     var gradient: CAGradientLayer!
     
-    lazy var contentViewSize = CGSize(width: view.frame.width, height: view.frame.height)
+    lazy var contentViewSize = CGSize(width: view.frame.width, height: view.frame.height - 100)
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
@@ -142,17 +142,17 @@ class DetailRecipeViewController: UIViewController {
         foodImage.setAnchors(top: contentView.topAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 0, leadingConstant: 0, trailingConstant: 0, bottomConstant: nil)
         foodImage.setAnchorSize(width: nil, height: 300)
         
-        titleLabelTextfield.setAnchors(top: foodImage.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
+        titleLabelTextfield.setAnchors(top: foodImage.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 15, trailingConstant: 10, bottomConstant: nil)
         titleLabelTextfield.setAnchorSize(width: nil, height: 50)
         
-        ingredientsLabel.setAnchors(top: titleLabelTextfield.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
-        ingredientsLabel.setAnchorSize(width: nil, height: 30)
+        ingredientsLabel.setAnchors(top: titleLabelTextfield.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 15, trailingConstant: 10, bottomConstant: nil)
+        ingredientsLabel.setAnchorSize(width: nil, height: 15)
         
         ingredientsTextView.setAnchors(top: ingredientsLabel.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
-        ingredientsTextView.setAnchorSize(width: nil, height: 150)
+        ingredientsTextView.setAnchorSize(width: nil, height: 100)
         
-        instructionsLabel.setAnchors(top: ingredientsTextView.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
-        instructionsLabel.setAnchorSize(width: nil, height: 30)
+        instructionsLabel.setAnchors(top: ingredientsTextView.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 15, leadingConstant: 15, trailingConstant: 10, bottomConstant: nil)
+        instructionsLabel.setAnchorSize(width: nil, height: 15)
         
         instructionsTextView.setAnchors(top: instructionsLabel.bottomAnchor, leading: contentView.leadingAnchor, trailing: contentView.trailingAnchor, bottom: nil, topConstant: 10, leadingConstant: 10, trailingConstant: 10, bottomConstant: nil)
         instructionsTextView.setAnchorSize(width: nil, height: 150)
